@@ -3,7 +3,7 @@ var axios = require('axios')
 
 module.exports = {
   getProductWeight: async function (productId) {
-    let URL = 'product-service-java.eu-gb.mybluemix.net/products' || 'mycluster.icp:8899/products';
+    let URL = process.env.MICROS_PRODUCTS_URL || 'mycluster.icp:8899/products';
     return axios
       .get(`https://${URL}/${productId}`)
       .then(response => {
@@ -14,6 +14,8 @@ module.exports = {
         }
       })
       .catch( (err) => {
+        console.log(process.env)
+        console.log(process.env.MICROS_PRODUCTS_URL)
         throw new Error(err)
       })
   }
